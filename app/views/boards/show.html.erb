@@ -1,0 +1,74 @@
+<div>
+  <div>
+    <h1>
+      <%= @the_board.name %>
+    </h1>
+<hr>
+<h2>Add a new post</h2>
+    <div>
+      <div>
+        <form action="/insert_board/<%= @the_board.id %>">
+          <div>
+            <label for="title_input">Title</label>
+            <input type="text" id="title_input" name="title">
+          </div>
+
+          <div>
+            <label for="body_input">Body</label>
+            <input type="text" id="body_input" name="body">
+          </div>
+
+          <div>
+            <label for="expires_input">Expires on</label>
+            <input type="date" id="expires_input" name="expires_on">
+          </div>
+          <div>
+            <button>Add post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+<hr>
+
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Posted on</th>
+    <th>Expires on</th>
+  </tr>
+  <% @the_board.each do |a_board| %>
+    <tr>
+      <td><%= a_board.name%> </td>
+      <td><%= a_board.name</td>
+      <td></td>
+      <td></td>
+    </tr>
+  <%end%>
+  <tr></tr>
+  <tr></tr>
+</table>
+
+<div>
+  <div>
+    <h2>
+      Edit board
+    </h2>
+
+    <form action="/modify_board/<%= @the_board.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_board.name %>">
+      </div>
+
+      <button>
+        Update board
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
