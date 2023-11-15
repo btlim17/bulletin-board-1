@@ -1,4 +1,5 @@
 <div>
+
   <div>
     <h1>
       <%= @the_board.name %>
@@ -7,21 +8,22 @@
 <h2>Add a new post</h2>
     <div>
       <div>
-        <form action="/insert_board/<%= @the_board.id %>">
+        <form action="/insert_post" method="post">
           <div>
             <label for="title_input">Title</label>
-            <input type="text" id="title_input" name="title">
+            <input type="text" id="title_input" name="query_title">
           </div>
 
           <div>
             <label for="body_input">Body</label>
-            <input type="text" id="body_input" name="body">
+            <textarea name="query_body" id="body_input" rows="3"></textarea>
           </div>
 
           <div>
             <label for="expires_input">Expires on</label>
-            <input type="date" id="expires_input" name="expires_on">
+            <input type="date" id="expires_input" name="query_expires_on">
           </div>
+          <input type="hidden" id="id_input" name="query_board_id" value="<%= @the_board.id%>">
           <div>
             <button>Add post</button>
           </div>
@@ -29,7 +31,7 @@
       </div>
     </div>
 <hr>
-
+<h2>Active posts</h2>
 <table border="1">
   <tr>
     <th>Title</th>
@@ -37,38 +39,34 @@
     <th>Posted on</th>
     <th>Expires on</th>
   </tr>
-  <% @the_board.each do |a_board| %>
+  <% @active_posts.each do |a_board| %>
     <tr>
-      <td><%= a_board.name%> </td>
-      <td><%= a_board.name</td>
-      <td></td>
-      <td></td>
+      <td><%= a_board.title%> </td>
+      <td><%= a_board.body %></td>
+      <td><%= a_board.created_at.strftime("%b, %e, %Y") %></td>
+      <td><%= a_board.expires_on.strftime("%b, %e, %Y") %></td>
     </tr>
   <%end%>
   <tr></tr>
   <tr></tr>
 </table>
-
-<div>
-  <div>
-    <h2>
-      Edit board
-    </h2>
-
-    <form action="/modify_board/<%= @the_board.id %>"  method="post" >
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_board.name %>">
-      </div>
-
-      <button>
-        Update board
-      </button>
-    </form>
-  </div>
 </div>
-
-<hr>
+<h2>Expired posts</h2>
+<div>
+  <table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>Posted on</th>
+    <th>Expires on</th>
+  </tr>
+  <% @expired_posts.each do |a_board|%>
+  <tr>
+      <td><%= a_board.title%> </td>
+      <td><%= a_board.body %></td>
+      <td><%= a_board.created_at.strftime("%b, %e, %Y") %></td>
+      <td><%= a_board.expires_on.strftime("%b, %e, %Y") %></td>
+    </tr>
+  <%end%>
+  </table>
+  </div>

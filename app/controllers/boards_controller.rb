@@ -14,6 +14,12 @@ class BoardsController < ApplicationController
 
     @the_board = matching_boards.at(0)
 
+    @board_posts = @the_board.posts
+
+    @active_posts = @board_posts.active
+
+    @expired_posts = @board_posts.expired
+
     render({ :template => "boards/show" })
   end
 
@@ -37,9 +43,9 @@ class BoardsController < ApplicationController
 
     if the_board.valid?
       the_board.save
-      redirect_to("/boards/#{the_board.id}", { :notice => "Board updated successfully."} )
+      redirect_to("/boards/#{@the_board.id}", { :notice => "Board updated successfully."} )
     else
-      redirect_to("/boards/#{the_board.id}", { :alert => the_board.errors.full_messages.to_sentence })
+      redirect_to("/boards", { :alert => the_board.errors.full_messages.to_sentence })
     end
   end
 
